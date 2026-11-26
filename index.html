@@ -128,6 +128,8 @@ nav .btn{padding:11px 22px;font-size:14px}
 .ph{padding:6px 16px 12px}
 .ph .top{display:flex;align-items:center;gap:14px}
 .av{width:72px;height:72px;border-radius:50%;padding:3px;background:linear-gradient(45deg,#FFD43B,#f0531c,#d6249f,#5b51d8);flex:none}
+.av span.lg,.ig .av2 span.lg{background:#fff}
+.av span.lg img,.ig .av2 span.lg img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
 .av span{width:100%;height:100%;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px;border:3px solid #fff}
 .ph .nums{display:flex;gap:18px;font-size:12px;color:#555;text-align:center;flex:1;justify-content:space-around}
 .ph .nums b{display:block;font-size:15px;color:#111}
@@ -385,6 +387,8 @@ const catName=Object.fromEntries(D.cats);
 const el=(h)=>{const t=document.createElement('template');t.innerHTML=h.trim();return t.content.firstChild};
 const $=s=>document.querySelector(s);
 const esc=s=>(s||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+const LG=new Set(['anakarinediasdesouza','rcardososeguros','moveiscasanobremuriae','domeventosbuffet','alexandregomes3398','haranutrition','advlandobonatti','claudenemota','grancacauoficial','patrciamazzerpogi','patymotos2026','prigrinaldas','respirarsaude','mamaecorujafotografias','fotoorientedourados']);
+const AVT=(c,ini)=>LG.has(c.id)?`<span class="lg"><img src="img/l/${c.id}.webp" alt="${esc(c.name)}" loading="lazy" decoding="async"></span>`:`<span>${ini}</span>`;
 /* all statics, interleaved by client */
 const per=D.clients.map(c=>c.items.filter(i=>i.t==='S').map(i=>({c:c.id,f:i.f[0],title:i.title})));
 const ALL=[];for(let k=0;;k++){let any=false;per.forEach(a=>{if(a[k]){ALL.push(a[k]);any=true}});if(!any)break}
@@ -420,7 +424,7 @@ chips();grid();
 /* profiles */
 (function(){const ps=D.clients.filter(c=>c.items.length>=6&&c.ig).slice(0,9);
  $('#pgrid').innerHTML=ps.map(c=>{const imgs=c.items.slice(0,c.items.length>=9?9:6).map(i=>i.f[0]);const ini=c.name.replace(/[^A-Za-zÀ-ú ]/g,'').split(' ').filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();
-  return `<div class="phone"><div class="scr"><div class="notch"><i></i></div><div class="ph"><div class="top"><div class="av"><span>${ini}</span></div><div class="nums"><div><b>Feed</b>cuidado pela<br>Modernize</div></div></div><h4>${esc(c.name)}</h4><div class="bio">${esc(catName[c.cat])}<br>📍 ${esc(c.city)}<br><em>@${esc(c.ig)}</em></div><div class="fb"><span class="f">Seguir</span><span>Mensagem</span></div></div><div class="gr">${imgs.map(f=>`<img src="${T(f)}" alt="" loading="lazy" decoding="async">`).join('')}</div></div></div>`}).join('')})();
+  return `<div class="phone"><div class="scr"><div class="notch"><i></i></div><div class="ph"><div class="top"><div class="av">${AVT(c,ini)}</div><div class="nums"><div><b>Feed</b>cuidado pela<br>Modernize</div></div></div><h4>${esc(c.name)}</h4><div class="bio">${esc(catName[c.cat])}<br>📍 ${esc(c.city)}<br><em>@${esc(c.ig)}</em></div><div class="fb"><span class="f">Seguir</span><span>Mensagem</span></div></div><div class="gr">${imgs.map(f=>`<img src="${T(f)}" alt="" loading="lazy" decoding="async">`).join('')}</div></div></div>`}).join('')})();
 /* instagram previews */
 (function(){const SVG={h:'<svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>',c:'<svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 20.5l1.6-5A8.4 8.4 0 1 1 21 11.5z"/></svg>',s:'<svg viewBox="0 0 24 24"><path d="M22 3 11 14M22 3l-7 18-4-7-7-4z"/></svg>',b:'<svg class="bk" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>'};
  const posts=[];D.clients.forEach(c=>c.items.forEach(i=>{if(i.caption)posts.push({c:c.id,f:i.f,cap:i.caption,t:i.t,title:i.title})}));
@@ -429,7 +433,7 @@ chips();grid();
  const list=pick.slice(0,30);
  const hl=t=>esc(t).replace(/(#[\p{L}\p{N}_]+)/gu,'<em>$1</em>');
  $('#igr').innerHTML=list.map((p,k)=>{const c=CL[p.c];const ini=c.name.replace(/[^A-Za-zÀ-ú ]/g,'').split(' ').filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();const car=p.f.length>1;
-  return `<article class="ig" data-k="${k}"><div class="hd"><div class="av2"><span>${ini}</span></div><div><b>${esc(c.ig||c.name)}</b><small>${esc(c.city)}</small></div><span class="dots3">···</span></div><div class="im"><div class="sl">${p.f.map(f=>`<img src="${T(f)}" alt="" loading="lazy" decoding="async">`).join('')}</div>${car?`<div class="cnt">1/${p.f.length}</div><div class="pd">${p.f.map((_,j)=>`<i class="${j?'':'on'}"></i>`).join('')}</div>`:''}</div><div class="acts">${SVG.h}${SVG.c}${SVG.s}${SVG.b}</div><div class="cap2"><div class="t"><b>${esc(c.ig||c.name)}</b> ${hl(p.cap)}</div><button type="button">mais</button></div></article>`}).join('');
+  return `<article class="ig" data-k="${k}"><div class="hd"><div class="av2">${AVT(c,ini)}</div><div><b>${esc(c.ig||c.name)}</b><small>${esc(c.city)}</small></div><span class="dots3">···</span></div><div class="im"><div class="sl">${p.f.map(f=>`<img src="${T(f)}" alt="" loading="lazy" decoding="async">`).join('')}</div>${car?`<div class="cnt">1/${p.f.length}</div><div class="pd">${p.f.map((_,j)=>`<i class="${j?'':'on'}"></i>`).join('')}</div>`:''}</div><div class="acts">${SVG.h}${SVG.c}${SVG.s}${SVG.b}</div><div class="cap2"><div class="t"><b>${esc(c.ig||c.name)}</b> ${hl(p.cap)}</div><button type="button">mais</button></div></article>`}).join('');
  document.querySelectorAll('#igr .ig').forEach(el=>{const p=list[+el.dataset.k],sl=el.querySelector('.sl'),cnt=el.querySelector('.cnt'),pd=[...el.querySelectorAll('.pd i')];let n=0;const go=i=>{n=Math.max(0,Math.min(p.f.length-1,i));sl.style.transform=`translateX(-${n*100}%)`;if(cnt)cnt.textContent=`${n+1}/${p.f.length}`;pd.forEach((d,j)=>d.classList.toggle('on',j===n))};
   const im=el.querySelector('.im');let x=null,moved=false;im.addEventListener('touchstart',e=>{x=e.touches[0].clientX;moved=false},{passive:true});im.addEventListener('touchend',e=>{if(x==null)return;const d=e.changedTouches[0].clientX-x;if(Math.abs(d)>40){moved=true;go(d<0?n+1:n-1)}x=null});
   im.addEventListener('click',e=>{if(moved){moved=false;return}const r=im.getBoundingClientRect();if(p.f.length>1&&e.clientX-r.left>r.width*.8&&n<p.f.length-1)return go(n+1);if(p.f.length>1&&e.clientX-r.left<r.width*.2&&n>0)return go(n-1);openLB(p.f.map(f=>({c:p.c,f,title:p.title})),n)});
