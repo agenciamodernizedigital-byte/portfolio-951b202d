@@ -1,0 +1,6 @@
+Como adicionar videos ao portfolio
+1. Coloque os arquivos .mp4 nesta pasta (ideal: vertical 9:16, 720x1280, ate ~8 MB cada).
+2. Edite videos.json, uma linha por video:
+   {"file":"nome.mp4","title":"Titulo","client":"@cliente","cat":"Talking head","poster":"nome.jpg"}
+   (cat vira filtro automatico: ex. "Talking head", "Reels", "So filmagem")
+3. Envie para o GitHub (git add, commit, push). O site atualiza sozinho.
