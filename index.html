@@ -418,7 +418,7 @@ chips();grid();
   cc.querySelector('.cv').onclick=()=>openLB(a.f.map(f=>({c:a.c,f,title:a.title})),n);
   let x=null;const cv=cc.querySelector('.cv');cv.addEventListener('touchstart',e=>x=e.touches[0].clientX,{passive:true});cv.addEventListener('touchend',e=>{if(x==null)return;const d=e.changedTouches[0].clientX-x;if(Math.abs(d)>40){go(d<0?n+1:n-1)}x=null})})})();
 /* profiles */
-(function(){const ps=D.clients.filter(c=>c.items.length>=6&&c.ig).slice(0,9);
+(function(){const ps=D.clients.filter(c=>c.ig&&LG.has(c.id)&&c.items.reduce((n,i)=>n+i.f.length,0)>=9).slice(0,12);
  $('#pgrid').innerHTML=ps.map(c=>{const cov=c.items.map(i=>i.f[0]);const ext=c.items.flatMap(i=>i.f.slice(1));const all=cov.concat(ext);const nn=all.length>=12?12:all.length>=9?9:all.length>=6?6:3;const imgs=all.slice(0,nn);const ini=c.name.replace(/[^A-Za-zÀ-ú ]/g,'').split(' ').filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();
   return `<div class="phone"><div class="scr"><div class="notch"><i></i></div><div class="ph"><div class="top"><div class="av">${AVT(c,ini)}</div><div class="nums"><div><b>Feed</b>cuidado pela<br>Modernize</div></div></div><h4>${esc(c.name)}</h4><div class="bio">${esc(catName[c.cat])}<br>📍 ${esc(c.city)}<br><em>@${esc(c.ig)}</em></div><div class="fb"><span class="f">Seguir</span><span>Mensagem</span></div></div><div class="gr">${imgs.map(f=>`<img src="${T(f)}" alt="" loading="lazy" decoding="async">`).join('')}</div></div></div>`}).join('')})();
 /* instagram previews */
