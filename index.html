@@ -234,12 +234,12 @@ footer img{height:44px}
 .faces li b{color:#fff}
 .fm{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start}
 .fm .c{border-radius:22px;overflow:hidden;position:relative;aspect-ratio:4/5;cursor:zoom-in;box-shadow:0 26px 56px rgba(0,0,0,.5);transition:transform .4s}
-.fm .c:nth-child(3n+2){transform:translateY(34px)}
+.fm .fi{display:flex;flex-direction:column;gap:9px}
+.fm .fi:nth-child(3n+2){transform:translateY(34px)}
+.fm .c{width:100%;padding:0;border:0;background:none;display:block}
 .fm .c:hover{transform:translateY(-6px) scale(1.02)}
-.fm .c:nth-child(3n+2):hover{transform:translateY(26px) scale(1.02)}
-.fm .c img{width:100%;height:100%;object-fit:cover}
-.fm .c span{position:absolute;left:10px;top:10px;background:rgba(1,15,46,.78);backdrop-filter:blur(8px);border-radius:99px;padding:5px 12px;font-size:11px;font-weight:700;line-height:1.2;text-align:left;color:var(--yellow)}
-.fm .c span em{display:block;font-style:normal;color:var(--yellow);font-size:10.5px}
+.fm .c img{width:100%;height:100%;object-fit:cover;display:block}
+.fm .tg{align-self:flex-start;background:rgba(255,212,59,.12);border:1px solid rgba(255,212,59,.35);border-radius:99px;padding:4px 11px;font-size:11px;font-weight:600;line-height:1.2;color:var(--yellow)}
 @media(max-width:900px){.faces .g{grid-template-columns:1fr}.fm{padding-bottom:34px}}
 .vc .ig2{position:absolute;right:10px;bottom:70px;display:flex;flex-direction:column;gap:14px;z-index:2;align-items:center}
 .vc .ig2 svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
@@ -437,7 +437,7 @@ chips();grid();
 /* faces */
 (function(){const SEL=[['claudenemota',0,'Corretora de imóveis'],['selmafelixdossantos',0,'Advogada'],['claudenemota',1,'Corretora de imóveis'],['advlandobonatti',0,'Advogado'],['selmafelixdossantos',3,'Advogada'],['nuancealphaville',5,'Estética e tricologia'],['claudenemota',3,'Corretora de imóveis'],['selmafelixdossantos',4,'Advogada'],['selmafelixdossantos',1,'Advogada']];
  const list=SEL.map(([id,i,l])=>({c:id,f:CL[id]&&CL[id].items[i]&&CL[id].items[i].f[0],l,title:CL[id]&&CL[id].items[i]&&CL[id].items[i].title})).filter(a=>a.f);
- $('#fm').innerHTML=list.map((a,k)=>`<button class="c" data-k="${k}"><img src="${T(a.f)}" alt="${esc(a.title)}" loading="lazy" decoding="async"><span>${esc(a.l)}</span></button>`).join('');
+ $('#fm').innerHTML=list.map((a,k)=>`<div class="fi"><button class="c" data-k="${k}"><img src="${T(a.f)}" alt="${esc(a.title)}" loading="lazy" decoding="async"></button><span class="tg">${esc(a.l)}</span></div>`).join('');
  $('#fm').onclick=e=>{const b=e.target.closest('.c');if(b)openLB(list,+b.dataset.k)}})();
 
 /* videos */
