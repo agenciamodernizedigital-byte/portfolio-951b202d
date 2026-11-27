@@ -484,7 +484,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--yellow);outline-off
 <section class="sec" id="numeros">
   <div class="wrap">
     <div class="head rv"><div><h2 class="t">De pizzaria a <span class="y">escritório de advocacia.</span></h2><p class="lead">Cada segmento tem a sua linguagem. A gente aprende o seu negócio e traduz para as redes.</p></div></div>
-    <div class="nums3 rv"><div class="n"><b>+350</b><span>clientes ativos</span></div><div class="n"><b>+50</b><span>segmentos atendidos</span></div><div class="n"><b>22</b><span>negócios reais neste portfólio</span></div><div class="n"><b>1 dia</b><span>útil para as alterações</span></div></div>
+    <div class="nums3 rv"><div class="n"><b>+350</b><span>clientes ativos</span></div><div class="n"><b>+50</b><span>segmentos atendidos</span></div><div class="n"><b>24</b><span>negócios reais neste portfólio</span></div><div class="n"><b>1 dia</b><span>útil para as alterações</span></div></div>
     <div class="cloud" id="cloud"></div>
   </div>
 </section>
@@ -524,7 +524,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--yellow);outline-off
   <div class="box"><img id="li" alt=""><div class="info" id="lf"></div></div>
 </div>
 
-<script src="data.js"></script>
+<script src="data.js?v=20261127"></script>
 <script>
 const D=window.PORTFOLIO,CL=Object.fromEntries(D.clients.map(c=>[c.id,c]));
 const T=f=>`img/t/${f}.webp`,F=f=>`img/f/${f}.webp`;
@@ -584,7 +584,7 @@ chips();grid();
   im.addEventListener('click',e=>{if(moved){moved=false;return}const r=im.getBoundingClientRect();if(p.f.length>1&&e.clientX-r.left>r.width*.8&&n<p.f.length-1)return go(n+1);if(p.f.length>1&&e.clientX-r.left<r.width*.2&&n>0)return go(n-1);openLB(p.f.map(f=>({c:p.c,f,title:p.title})),n)});
   const b=el.querySelector('.cap2 button');b.onclick=()=>{const o=el.querySelector('.cap2').classList.toggle('open');b.textContent=o?'menos':'mais'}})})();
 /* faces */
-(function(){const SEL=[['claudenemota',0,'Corretora de imóveis'],['selmafelixdossantos',0,'Advogada'],['claudenemota',1,'Corretora de imóveis'],['advlandobonatti',0,'Advogado'],['selmafelixdossantos',3,'Advogada'],['nuancealphaville',5,'Estética e tricologia'],['claudenemota',3,'Corretora de imóveis'],['selmafelixdossantos',4,'Advogada'],['selmafelixdossantos',1,'Advogada']];
+(function(){const SEL=[['claudenemota',0,'Corretora de imóveis'],['2sterraplanagem',2,'Terraplanagem'],['nuancealphaville',5,'Estética e tricologia'],['advlandobonatti',0,'Advogado'],['fthosp60mais',1,'Hospital e cuidado'],['rgmorettitransportes',0,'Transporte escolar'],['selmafelixdossantos',1,'Advogada'],['2sterraplanagem',0,'Terraplanagem'],['legacyrhassessoria',1,'Recursos humanos'],['mamaecorujafotografias',2,'Fotografia de gestante'],['claudenemota',8,'Corretora de imóveis'],['ruasdasmotos',0,'Motos'],['patrciamazzerpogi',3,'Pilates'],['prigrinaldas',0,'Noivas'],['2sterraplanagem',1,'Terraplanagem']];
  const list=SEL.map(([id,i,l])=>({c:id,f:CL[id]&&CL[id].items[i]&&CL[id].items[i].f[0],l,title:CL[id]&&CL[id].items[i]&&CL[id].items[i].title})).filter(a=>a.f);
  $('#fm').innerHTML=list.map((a,k)=>`<div class="fi"><button class="c" data-k="${k}"><img src="${T(a.f)}" alt="${esc(a.title)}" loading="lazy" decoding="async"></button><span class="tg">${esc(a.l)}</span></div>`).join('');
  $('#fm').onclick=e=>{const b=e.target.closest('.c');if(b)openLB(list,+b.dataset.k)}})();
