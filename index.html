@@ -391,6 +391,16 @@ footer{background:var(--deep);border-top:1px solid var(--line);font-size:12.5px;
  footer .in{flex-direction:column;align-items:flex-start;gap:12px}
  p.lead{font-size:15.5px}
 }
+
+/* produtos */
+.pdg{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:start}
+.pdg .fi{display:flex;flex-direction:column;gap:12px}
+.pdg .c{width:100%;padding:0;border:0;background:none;display:block;border-radius:var(--r);overflow:hidden;aspect-ratio:4/5;cursor:zoom-in;box-shadow:0 26px 56px rgba(0,0,0,.5);outline:1px solid rgba(255,255,255,.08);outline-offset:-1px;transition:transform .7s var(--ease)}
+.pdg .c img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.pdg .c:hover{transform:translateY(-6px)}.pdg .c:hover img{transform:scale(1.05)}
+.pdg .fi:nth-child(4n+2),.pdg .fi:nth-child(4n+4){margin-top:38px}
+.pdg .tg{font-size:12.5px;color:var(--mute);letter-spacing:.02em;line-height:1.35}.pdg .tg b{display:block;color:#fff;font-weight:600;font-size:14px}
+@media(max-width:900px){.pdg{grid-template-columns:repeat(2,1fr);gap:14px}.pdg .fi:nth-child(4n+2),.pdg .fi:nth-child(4n+4){margin-top:0}.pdg .fi:nth-child(2n){margin-top:28px}}
 /* foco visivel */
 a:focus-visible,button:focus-visible{outline:2px solid var(--yellow);outline-offset:3px}
 @media(max-width:600px){h2.t{max-width:none}.hero h1{max-width:none}.sec{padding:76px 0}.head{margin-bottom:30px}.hstats>div{padding-right:18px;margin-right:18px}}
@@ -400,7 +410,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--yellow);outline-off
 <body>
 <nav id="nav"><div class="wrap in">
   <a href="#topo" aria-label="Modernize Digital"><img src="assets/logo.png" alt="Modernize Digital"></a>
-  <div class="links"><a href="#posts">Posts</a><a href="#instagram">Instagram</a><a href="#carrosseis">Carrosséis</a><a href="#rosto">Imagem fiel</a><a href="#perfis">Perfis</a><a href="#videos">Vídeos</a></div>
+  <div class="links"><a href="#posts">Posts</a><a href="#instagram">Instagram</a><a href="#carrosseis">Carrosséis</a><a href="#rosto">Imagem fiel</a><a href="#produtos">Produtos</a><a href="#perfis">Perfis</a><a href="#videos">Vídeos</a></div>
 </div></nav>
 
 <header class="hero" id="topo">
@@ -463,6 +473,13 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--yellow);outline-off
       </ul>
     </div>
     <div class="fm rv" id="fm"></div>
+  </div>
+</section>
+
+<section class="sec" id="produtos">
+  <div class="wrap">
+    <div class="head rv"><div><h2 class="t">Seu produto no <span class="y">melhor ângulo.</span></h2><p class="lead">Do pudim ao sofá, do suplemento ao capacete: a gente apresenta o que você vende com luz, cenário e destaque, para dar vontade de comprar.</p></div></div>
+    <div class="pdg" id="pdg"></div>
   </div>
 </section>
 
@@ -589,6 +606,11 @@ chips();grid();
  $('#fm').innerHTML=list.map((a,k)=>`<div class="fi"><button class="c" data-k="${k}"><img src="${T(a.f)}" alt="${esc(a.title)}" loading="lazy" decoding="async"></button><span class="tg">${esc(a.l)}</span></div>`).join('');
  $('#fm').onclick=e=>{const b=e.target.closest('.c');if(b)openLB(list,+b.dataset.k)}})();
 
+/* produtos */
+(function(){const SEL=[['anakarinediasdesouza',1,'Alimentação'],['haranutrition',5,'Suplementos'],['patymotos2026',4,'Acessórios de moto'],['prigrinaldas',9,'Acessórios para noivas'],['moveiscasanobremuriae',4,'Móveis'],['fotoorientedourados',2,'Brindes personalizados'],['domeventosbuffet',5,'Doces e festas'],['anakarinediasdesouza',3,'Alimentação'],['haranutrition',8,'Suplementos'],['domeventosbuffet',0,'Buffet e salgados'],['fotoorientedourados',3,'Quadros e fotos'],['patymotos2026',2,'Acessórios de moto']];
+ const list=SEL.map(([id,i,l])=>({c:id,f:CL[id]&&CL[id].items[i]&&CL[id].items[i].f[0],l,title:CL[id]&&CL[id].items[i]&&CL[id].items[i].title})).filter(a=>a.f);
+ $('#pdg').innerHTML=list.map((a,k)=>`<div class="fi"><button class="c" data-k="${k}" aria-label="Ampliar arte de ${esc(CL[a.c].name)}"><img src="${T(a.f)}" alt="${esc(a.title)}" loading="lazy" decoding="async"></button><span class="tg"><b>${esc(CL[a.c].name)}</b>${esc(a.l)}</span></div>`).join('');
+ $('#pdg').onclick=e=>{const b=e.target.closest('.c');if(b)openLB(list,+b.dataset.k)}})();
 /* videos */
 (async function(){let vids=[];try{const r=await fetch('videos/videos.json',{cache:'no-store'});if(r.ok)vids=await r.json()}catch(e){}
  const cats=['Todos',...new Set(vids.map(v=>v.cat).filter(Boolean))];let vc='Todos';
