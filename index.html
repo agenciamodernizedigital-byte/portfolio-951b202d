@@ -363,6 +363,34 @@ footer{background:var(--deep);border-top:1px solid var(--line);font-size:12.5px;
 }
 @media(max-width:960px){.hero{padding-top:92px;min-height:auto}.stage{height:300px;margin:0 0 6px}.robot{height:92%}.hstats{margin-top:36px}}
 @media(max-width:600px){.stage{height:270px}.hero h1{font-size:clamp(36px,10.4vw,48px)}}
+
+/* videos reais */
+.vcw{flex:none;width:min(74vw,300px);scroll-snap-align:center}
+.vc.real{width:100%;cursor:pointer}
+.vc.real:after{display:none}
+.vc.real video{object-fit:cover;background:#010C26}
+.vc.real .pl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(1,12,38,0) 55%,rgba(1,12,38,.55));transition:opacity .4s}
+.vc.real .pl .play{width:68px;height:68px;background:rgba(255,255,255,.14);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.35);color:#fff;box-shadow:0 14px 40px rgba(0,0,0,.4);transition:transform .5s var(--ease),background .3s}
+.vc.real:hover .pl .play{transform:scale(1.08);background:rgba(245,200,66,.95);color:var(--navy)}
+.vc.real.on .pl{opacity:0;pointer-events:none}
+.vt{margin-top:16px;font-size:13px;color:var(--mute);line-height:1.4}
+.vt b{display:block;color:#fff;font-size:15px;font-weight:600;margin-bottom:2px}
+
+/* celular: acabamento */
+@media(max-width:600px){
+ nav .in{height:60px}nav img{height:38px}
+ .rail,.igr,.vrail,.pgrid{-webkit-mask-image:linear-gradient(90deg,#000 92%,transparent);mask-image:linear-gradient(90deg,#000 92%,transparent)}
+ .art .cap{background:linear-gradient(transparent,rgba(1,12,38,.9));padding:34px 10px 9px}
+ .art .cap span{font-weight:500;opacity:.9}
+ .chip{padding:10px 16px}
+ .btn{padding:16px 26px}
+ .cta .btn{flex:1;justify-content:center}
+ .faces .g{gap:34px}
+ .fm{gap:10px}.fm .fi:nth-child(3n+2){transform:translateY(22px)}
+ .final .rb{height:300px}.final .rb img.m{height:380px}
+ footer .in{flex-direction:column;align-items:flex-start;gap:12px}
+ p.lead{font-size:15.5px}
+}
 /* foco visivel */
 a:focus-visible,button:focus-visible{outline:2px solid var(--yellow);outline-offset:3px}
 @media(max-width:600px){h2.t{max-width:none}.hero h1{max-width:none}.sec{padding:76px 0}.head{margin-bottom:30px}.hstats>div{padding-right:18px;margin-right:18px}}
@@ -447,7 +475,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--yellow);outline-off
 
 <section class="sec light" id="videos">
   <div class="wrap">
-    <div class="head rv"><div><h2 class="t">Vídeo editado para <span style="color:var(--royal)">prender até o fim.</span></h2><p class="lead">Legendas, cortes, ritmo e identidade. Seja o cliente falando para a câmera ou só filmando o negócio, a gente edita.</p></div></div>
+    <div class="head rv"><div><h2 class="t">Vídeo editado para <span style="color:var(--royal)">prender até o fim.</span></h2><p class="lead">Vídeos explicativos em motion, com legenda, ritmo e identidade da marca. Toque para assistir.</p></div></div>
     <div class="chips" id="vchips"></div>
     <div class="vrail" id="vrail"></div>
   </div>
@@ -567,7 +595,7 @@ chips();grid();
  const render=()=>{const list=vids.length?vids.filter(v=>vc==='Todos'||v.cat===vc):[];
   if(!list.length){const labs=['Cliente falando para a câmera','Reels com legenda dinâmica','Só filmagem, a gente edita','Vídeo de produto','Antes e depois do vídeo','Reels de promoção','Bastidores do negócio','Dica rápida do especialista'];
    $('#vrail').innerHTML=labs.map((l,i)=>`<div class="vc"><div class="ph2"><div class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><b>${l}</b><small>Em breve aqui</small></div><div class="rl">Reels</div><div class="ig2"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 20.5l1.6-5A8.4 8.4 0 1 1 21 11.5z"/></svg><svg viewBox="0 0 24 24"><path d="M22 3 11 14M22 3l-7 18-4-7-7-4z"/></svg></div><div class="lbl"><b>Modelo ${String(i+1).padStart(2,'0')}</b>Edição Modernize</div></div>`).join('');return}
-  $('#vrail').innerHTML=list.map(v=>`<div class="vc"><video src="videos/${esc(v.file)}" ${v.poster?`poster="videos/${esc(v.poster)}"`:''} controls playsinline preload="none"></video><div class="lbl"><b>${esc(v.title||'')}</b>${esc(v.client||'')}</div></div>`).join('')};
+  $('#vrail').innerHTML=list.map(v=>`<div class="vcw"><div class="vc real"><video src="videos/${esc(v.file)}" ${v.poster?`poster="videos/${esc(v.poster)}"`:''} playsinline preload="none"></video><button class="pl" aria-label="Assistir ${esc(v.title||'vídeo')}"><span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></button></div><p class="vt"><b>${esc(v.title||'')}</b>${esc(v.client||'')}</p></div>`).join('');$('#vrail').querySelectorAll('.vc.real').forEach(c=>{const v=c.querySelector('video'),b=c.querySelector('.pl');b.onclick=()=>{document.querySelectorAll('#vrail video').forEach(o=>{if(o!==v)o.pause()});v.controls=true;v.play()};v.onplay=()=>c.classList.add('on');v.onpause=()=>{if(!v.ended)return;c.classList.remove('on')};v.onended=()=>{c.classList.remove('on');v.controls=false}})};
  $('#vchips').innerHTML=vids.length?cats.map(k=>`<button class="chip ${k===vc?'on':''}" data-k="${esc(k)}">${esc(k)}</button>`).join(''):'';
  $('#vchips').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;vc=b.dataset.k;$('#vchips').querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===b));render()};
  render()})();
