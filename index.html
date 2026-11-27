@@ -544,7 +544,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--yellow);outline-off
   <div class="box"><img id="li" alt=""><div class="info" id="lf"></div></div>
 </div>
 
-<script src="data.js?v=20261127"></script>
+<script src="data.js?v=20261127b"></script>
 <script>
 const D=window.PORTFOLIO,CL=Object.fromEntries(D.clients.map(c=>[c.id,c]));
 const T=f=>`img/t/${f}.webp`,F=f=>`img/f/${f}.webp`;
@@ -552,7 +552,7 @@ const catName=Object.fromEntries(D.cats);
 const el=(h)=>{const t=document.createElement('template');t.innerHTML=h.trim();return t.content.firstChild};
 const $=s=>document.querySelector(s);
 const esc=s=>(s||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
-const LG=new Set(['anakarinediasdesouza','rcardososeguros','moveiscasanobremuriae','domeventosbuffet','alexandregomes3398','haranutrition','advlandobonatti','claudenemota','grancacauoficial','patrciamazzerpogi','patymotos2026','prigrinaldas','respirarsaude','mamaecorujafotografias','fotoorientedourados']);
+const LG=new Set(['coimbraecarvalho','gpsemijoias','escolaandreluiz','itapoancambio','norarqaplicada','anakarinediasdesouza','rcardososeguros','moveiscasanobremuriae','domeventosbuffet','alexandregomes3398','haranutrition','advlandobonatti','claudenemota','grancacauoficial','patrciamazzerpogi','patymotos2026','prigrinaldas','respirarsaude','mamaecorujafotografias','fotoorientedourados']);
 const AVT=(c,ini)=>LG.has(c.id)?`<span class="lg"><img src="img/l/${c.id}.webp" alt="${esc(c.name)}" loading="lazy" decoding="async"></span>`:`<span>${ini}</span>`;
 /* all statics, interleaved by client */
 const per=D.clients.map(c=>c.items.filter(i=>i.t==='S').map(i=>({c:c.id,f:i.f[0],title:i.title})));
@@ -587,8 +587,8 @@ chips();grid();
   cc.querySelector('.cv').onclick=()=>openLB(a.f.map(f=>({c:a.c,f,title:a.title})),n);
   let x=null;const cv=cc.querySelector('.cv');cv.addEventListener('touchstart',e=>x=e.touches[0].clientX,{passive:true});cv.addEventListener('touchend',e=>{if(x==null)return;const d=e.changedTouches[0].clientX-x;if(Math.abs(d)>40){go(d<0?n+1:n-1)}x=null})})})();
 /* profiles */
-(function(){const ps=D.clients.filter(c=>c.ig&&LG.has(c.id)&&c.items.length>=9).slice(0,12);
- $('#pgrid').innerHTML=ps.map(c=>{const cov=c.items.map(i=>i.f[0]);const nn=9;const imgs=cov.slice(0,nn);const ini=c.name.replace(/[^A-Za-zÀ-ú ]/g,'').split(' ').filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();
+(function(){const ps=D.clients.filter(c=>c.ig&&LG.has(c.id)&&c.items.length>=12).slice(0,14);
+ $('#pgrid').innerHTML=ps.map(c=>{const cov=c.items.map(i=>i.f[0]);const nn=12;const imgs=cov.slice(0,nn);const ini=c.name.replace(/[^A-Za-zÀ-ú ]/g,'').split(' ').filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();
   return `<div class="phone"><div class="scr"><div class="notch"><i></i></div><div class="ph"><div class="top"><div class="av">${AVT(c,ini)}</div><div class="nums"><div><b>Feed</b>cuidado pela<br>Modernize</div></div></div><h4>${esc(c.name)}</h4><div class="bio">${esc(catName[c.cat])}<br>📍 ${esc(c.city)}<br><em>@${esc(c.ig)}</em></div><div class="fb"><span class="f">Seguir</span><span>Mensagem</span></div></div><div class="gr">${imgs.map(f=>`<img src="${T(f)}" alt="" loading="lazy" decoding="async">`).join('')}</div></div></div>`}).join('')})();
 /* instagram previews */
 (function(){const SVG={h:'<svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>',c:'<svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 20.5l1.6-5A8.4 8.4 0 1 1 21 11.5z"/></svg>',s:'<svg viewBox="0 0 24 24"><path d="M22 3 11 14M22 3l-7 18-4-7-7-4z"/></svg>',b:'<svg class="bk" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>'};
